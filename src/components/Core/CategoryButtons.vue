@@ -1,36 +1,56 @@
 <template>
   <div class="category-buttons">
     <icon-button
-      icon="sitemap"
+      v-for="button in buttons"
+      :key="button.name"
+      :icon="button.icon"
       class="button"
-    />
-    <icon-button
-      icon="terminal"
-      class="button"
-    />
-    <icon-button
-      icon="sitemap"
-      class="button"
-    />
-    <icon-button
-      icon="terminal"
-      class="button"
-    />
-    <icon-button
-      icon="sitemap"
-      class="button"
+      @mouseenter="$emit('hover', button.name)"
     />
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import IconButton from '@/components/UI/IconButton.vue';
+
+type CategoryButton = {
+  name: string;
+  icon: string;
+}
 
 export default defineComponent({
   components: {
     IconButton,
   },
+  emits: ['hover'],
+  data(): {buttons: CategoryButton[]} {
+    return {
+      buttons: [
+        {
+          name: 'Languages',
+          icon: 'code',
+        },
+        {
+          name: 'Frameworks',
+          icon: 'sitemap',
+        },
+        {
+          name: 'Jobs',
+          icon: 'terminal',
+        },
+        {
+          name: 'Overview',
+          icon: 'eye',
+        },
+        {
+          name: 'Random',
+          icon: 'gamepad-alt',
+        },
+      ],
+    };
+  },
+
 });
 </script>
 

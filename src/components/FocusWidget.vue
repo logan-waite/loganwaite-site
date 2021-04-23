@@ -62,7 +62,7 @@ export default defineComponent({
           { x: -position.value.x, y: position.value.y },
           widget.value,
         );
-        console.log({ svgDimensions });
+
         const line = findLinePoints(
           position.value,
           distance,
@@ -75,7 +75,7 @@ export default defineComponent({
           ? position.value.x
           : -(widget.value.offsetWidth - position.value.x)}px`;
         containerStyles.value.marginTop = `${-(widget.value.offsetHeight + position.value.y)}px`;
-        console.log({ position: position.value, containerStyles });
+
         // SVG Styles
         svgStyles.value.height = `${clampMin(2, svgDimensions.height)}px`;
         svgStyles.value.width = `${svgDimensions.width}px`;
@@ -85,7 +85,7 @@ export default defineComponent({
         } else {
           svgStyles.value.top = `${widget.value.offsetHeight}px`;
         }
-        console.log({ svgStyles });
+
         // Line points
         points.value = `${line.start.x},${line.start.y} ${line.mid.x},${line.mid.y} ${line.end.x},${line.end.y}`;
       }
@@ -153,6 +153,7 @@ export default defineComponent({
     width: 0px;
     height: 100px;
     // border: 1px solid red;
+    pointer-events: none;
   }
 
 </style>

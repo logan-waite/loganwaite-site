@@ -1,38 +1,48 @@
 <template>
   <div class="middle">
-    <core />
-    <widget
-      :position="{x: -100, y: 100}"
-    >
-      <span>Upper Left</span>
-    </widget>
-    <widget
-      :position="{x: 100, y: 100}"
-    >
-      <span>Upper Right</span>
-    </widget>
-    <widget
-      :position="{x: 100, y: -100}"
-    >
-      <span>Lower Right</span>
-    </widget>
-    <widget
-      :position="{x: -100, y: -100}"
-    >
-      <span>Lower Left</span>
-    </widget>
+    <div class="middle__top">
+      <Focus @category-hover="handleCategoryHover" />
+    </div>
+    <div class="middle__bottom">
+      <text-display :text="displayText" />
+    </div>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
-import Widget from '@/components/Widget.vue';
-import Core from '@/components/Core.vue';
+import Focus from '@/components/Focus.vue';
+// import Widget from '@/components/Widget.vue';
+// import Core from '@/components/Core.vue';
+import TextDisplay from '@/components/TextDisplay.vue';
 
 export default defineComponent({
   components: {
-    Widget,
-    Core,
+    // Widget,
+    // Core,
+    Focus,
+    TextDisplay,
+  },
+  data() {
+    return {
+      displayText: 'Good Morning, Sir.',
+    };
+  },
+  methods: {
+    handleCategoryHover(category) {
+      this.displayText = category;
+    },
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.middle {
+  display: flex;
+  flex-direction: column;
+
+  &__bottom {
+    width: 100%;
+  }
+}
+</style>

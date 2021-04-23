@@ -36,6 +36,7 @@ export default defineComponent({
 .left,
 .right {
   width: 100px;
+  flex: 1;
 }
 
 </style>
