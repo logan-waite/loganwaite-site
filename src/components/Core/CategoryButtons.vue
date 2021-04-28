@@ -1,56 +1,28 @@
 <template>
   <div class="category-buttons">
     <icon-button
-      v-for="button in buttons"
-      :key="button.name"
-      :icon="button.icon"
+      v-for="category in categories"
+      :key="category.id"
+      :icon="category.icon"
       class="button"
-      @mouseenter="$emit('hover', button.name)"
+      @mouseenter="$emit('hover', category.name)"
+      @mouseleave="$emit('hover')"
+      @click="$emit('click', category.name)"
     />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapState } from 'vuex';
 import IconButton from '@/components/UI/IconButton.vue';
-
-type CategoryButton = {
-  name: string;
-  icon: string;
-}
 
 export default defineComponent({
   components: {
     IconButton,
   },
-  emits: ['hover'],
-  data(): {buttons: CategoryButton[]} {
-    return {
-      buttons: [
-        {
-          name: 'Languages',
-          icon: 'code',
-        },
-        {
-          name: 'Frameworks',
-          icon: 'sitemap',
-        },
-        {
-          name: 'Jobs',
-          icon: 'terminal',
-        },
-        {
-          name: 'Overview',
-          icon: 'eye',
-        },
-        {
-          name: 'Random',
-          icon: 'gamepad-alt',
-        },
-      ],
-    };
-  },
-
+  emits: ['hover', 'click'],
+  computed: mapState({ categories: 'categories' }),
 });
 </script>
 

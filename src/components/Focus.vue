@@ -1,6 +1,9 @@
 <template>
   <div class="focus">
-    <core @category-hover="$emit('category-hover', $event)" />
+    <core
+      @category-hover="$emit('category-hover', $event)"
+      @category-click="$emit('category-click', $event)"
+    />
     <widget
       :position="{x: -100, y: 100}"
     >
@@ -33,7 +36,7 @@ export default {
     Widget,
     Core,
   },
-  emits: ['category-hover'],
+  emits: ['category-hover', 'category-click'],
 };
 </script>
 

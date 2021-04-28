@@ -4,7 +4,10 @@
       :is-working="working"
       :is-active="active"
     />
-    <category-buttons @hover="$emit('category-hover', $event)" />
+    <category-buttons
+      @hover="$emit('category-hover', $event)"
+      @click="$emit('category-click', $event)"
+    />
     <!-- <background :is-active="active" /> -->
     <!-- <rotating-circles :is-active="active" /> -->
   </div>
@@ -26,7 +29,7 @@ export default defineComponent({
     // Background,
     // RotatingCircles,
   },
-  emits: ['category-hover'],
+  emits: ['category-hover', 'category-click'],
   data() {
     return {
       active: false,

@@ -1,10 +1,9 @@
-import { createStore } from 'vuex';
-import portfolio from './modules/portfolio';
+import { createStore, Store } from 'vuex';
+import type { State } from './interfaces';
+import state from './state';
 
-const store = createStore({
-  modules: {
-    portfolio,
-  },
+const store: Store<State> = createStore({
+  state,
 });
 
 export default store;
