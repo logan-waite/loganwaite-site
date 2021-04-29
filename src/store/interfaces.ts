@@ -1,7 +1,6 @@
-// export interface RootState {
-//   root: boolean;
-//   version: string;
-// }
+export interface RootState {
+  version: string;
+}
 
 export type State = {
   categories: Category[];
@@ -11,7 +10,7 @@ export type Widget = {
   id: string;
   text: string;
   query: string;
-  position: {x: number; y: number} | undefined;
+  position: {x: number; y: number};
 };
 
 export type Category = {

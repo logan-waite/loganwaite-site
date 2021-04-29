@@ -7,7 +7,7 @@
       class="button"
       @mouseenter="$emit('hover', category.name)"
       @mouseleave="$emit('hover')"
-      @click="$emit('click', category.name)"
+      @click="$emit('click', category.id)"
     />
   </div>
 </template>
@@ -22,7 +22,7 @@ export default defineComponent({
     IconButton,
   },
   emits: ['hover', 'click'],
-  computed: mapState({ categories: 'categories' }),
+  computed: mapState(['categories']),
 });
 </script>
 
