@@ -46,6 +46,7 @@ $division: 360 / $buttons;
   margin-left: -23px;
   margin-top: -23px;
   opacity: 0;
+  cursor: pointer;
 
   @for $i from 0 to $buttons {
     $angle: $division * $i + 0deg;

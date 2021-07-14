@@ -10,6 +10,8 @@ type Rect = {
 
 export type Coords = {x: number; y: number};
 
+const coreRadius = 100;
+
 export function getSvgDimensions(distance: Coords, position: Coords, widget: HTMLDivElement): Rect {
   const height = distance.y;
   const top = widget.offsetHeight;
@@ -26,7 +28,6 @@ function calculateEndPoint(mid: Coords, target: Coords, position: Coords) {
     x: position.x < 0 ? -1 : 1,
     y: position.y < 0 ? -1 : 1,
   };
-  const coreRadius = 100;
   const slope = (target.y - mid.y) / (target.x - mid.x);
 
   if (slope === 0) {
@@ -55,21 +56,25 @@ export function findLinePoints(
   svg: Rect,
   widget: {width: number; height: number},
 ) {
+  // the part under the content
   const start = {
     x: position.x < 0 ? 0 : svg.width,
     y: position.y < 0 ? distance.y : 0,
   };
 
+  // where the line bends
   const mid = {
     x: position.x < 0 ? widget.width : svg.width - widget.width,
     y: position.y < 0 ? distance.y : 0,
   };
 
+  // center of core radius
   const target = {
     x: position.x < 0 ? svg.width : 0,
     y: position.y < 0 ? 0 : svg.height,
   };
 
+  // where we want the line to actually end
   const end = calculateEndPoint(mid, target, position);
 
   return { start, mid, end };

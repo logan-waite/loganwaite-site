@@ -7,24 +7,11 @@
           @category-click="handleCategoryClick"
         />
         <widget
-          :position="{x: -100, y: 100}"
+          v-for="widget in selectedCategory?.widgets"
+          :key="widget.id"
+          :position="widget.position"
         >
-          <span>Upper Left</span>
-        </widget>
-        <widget
-          :position="{x: 100, y: 100}"
-        >
-          <span>Upper Right</span>
-        </widget>
-        <widget
-          :position="{x: 100, y: -100}"
-        >
-          <span>Lower Right</span>
-        </widget>
-        <widget
-          :position="{x: -100, y: -150}"
-        >
-          <span>Lower Left</span>
+          <span>{{ widget.text }}</span>
         </widget>
       </div>
     </div>
@@ -40,6 +27,13 @@ import Widget from '@/components/FocusWidget.vue';
 import Core from '@/components/Core.vue';
 import TextDisplay from '@/components/TextDisplay.vue';
 import { mapState } from 'vuex';
+import { Category } from '@/store/interfaces';
+import { Guid } from '@/libs/types';
+
+type Data = {
+  displayText: string;
+  selectedCategory: Category | undefined;
+}
 
 export default defineComponent({
   components: {
@@ -47,7 +41,7 @@ export default defineComponent({
     Core,
     TextDisplay,
   },
-  data() {
+  data(): Data {
     return {
       displayText: 'Good Morning, Sir.',
       selectedCategory: undefined,
@@ -57,12 +51,15 @@ export default defineComponent({
     categories: 'categories',
   }),
   methods: {
-    handleCategoryHover(category: any) {
+    handleCategoryHover(text: string) {
       const defaultDisplayText = 'Good Morning, Sir';
-      this.displayText = category ?? this.selectedCategory ?? defaultDisplayText;
+      this.displayText = text ?? this.selectedCategory?.name ?? defaultDisplayText;
     },
-    handleCategoryClick(category: any) {
-      this.selectedCategory = category;
+    handleCategoryClick(id: Guid) {
+      this.selectedCategory = this.$store.getters.getCategoryById(id);
+      if (this.selectedCategory) {
+        this.selectedCategory.widgets[0].position = { x: 0, y: 1 };
+      }
     },
   },
 });

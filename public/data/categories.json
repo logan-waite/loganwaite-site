@@ -20,7 +20,20 @@
   {
     "name": "Languages",
     "icon": "code",
-    "widgets": []
+    "widgets": [
+      {
+        "text": "Javascript", 
+        "query": "javascript"
+      },
+      {
+        "text": "Elm", 
+        "query": "elm"
+      },
+      {
+        "text": "Python", 
+        "query": "python"
+      }
+    ]
   },
   {
     "name": "Jobs",

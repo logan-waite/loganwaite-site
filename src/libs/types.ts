@@ -4,3 +4,5 @@ type OneOnly<Obj, Key extends keyof Obj> =
 type OneOfByKey<Obj> = {[key in keyof Obj]: OneOnly<Obj, key> };
 
 export type OneOf<Obj> = ValueOf<OneOfByKey<Obj>>;
+
+export type Guid = string;
